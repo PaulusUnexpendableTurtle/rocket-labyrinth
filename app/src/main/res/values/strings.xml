@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name" translatable="false">Rocket Labyrinth</string>
+
+    <string name="marathon_header">CHOOSE MODE</string>
+
+    <string name="easy_marathon_button">Easy</string>
+    <string name="medium_marathon_button">Medium</string>
+    <string name="hard_marathon_button">Hard</string>
+    <string name="insane_marathon_button">Insane</string>
+</resources>

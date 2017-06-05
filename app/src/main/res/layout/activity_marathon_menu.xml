@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_game"
+    tools:context=".activities.MarathonMenuActivity">
+
+    <TextView
+
+        android:id="@+id/marathon_mode_choice"
+        android:text="@string/marathon_header"
+        style="@style/Button"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"/>
+
+    <Button
+        android:id="@+id/marathon_medium_button"
+        android:text="@string/medium_marathon_button"
+
+        style="@style/Button"
+
+        android:onClick="onClick"
+
+        android:layout_centerInParent="true"
+        android:layout_alignStart="@id/marathon_mode_choice"
+        android:layout_alignEnd="@id/marathon_mode_choice" />
+
+    <Button
+        android:id="@+id/marathon_easy_button"
+        style="@style/Button"
+
+        android:height="48sp"
+        android:layout_above="@id/marathon_medium_button"
+
+        android:layout_alignEnd="@id/marathon_medium_button"
+        android:layout_alignStart="@+id/marathon_medium_button"
+        android:onClick="onClick"
+        android:text="@string/easy_marathon_button" />
+
+    <Button
+        android:id="@+id/marathon_hard_button"
+        android:text="@string/hard_marathon_button"
+        style="@style/Button"
+
+        android:onClick="onClick"
+
+        android:layout_below="@+id/marathon_medium_button"
+        android:layout_alignStart="@+id/marathon_medium_button"
+        android:layout_alignEnd="@id/marathon_medium_button" />
+
+    <Button
+        android:id="@+id/marathon_insane_button"
+        style="@style/Button"
+
+        android:layout_alignEnd="@id/marathon_medium_button"
+
+        android:layout_alignStart="@+id/marathon_medium_button"
+        android:layout_below="@+id/marathon_hard_button"
+        android:onClick="onClick"
+        android:text="@string/insane_marathon_button" />
+
+</RelativeLayout>

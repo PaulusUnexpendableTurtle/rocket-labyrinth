@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="easy_marathon_button">просто</string>
+    <string name="hard_marathon_button">сложно</string>
+    <string name="insane_marathon_button">безумно</string>
+    <string name="marathon_header">ВЫБЕРИ РЕЖИМ</string>
+    <string name="medium_marathon_button">средне</string>
+</resources>
