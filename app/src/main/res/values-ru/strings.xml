@@ -5,4 +5,5 @@
     <string name="insane_marathon_button">безумно</string>
     <string name="marathon_header">ВЫБЕРИ РЕЖИМ</string>
     <string name="medium_marathon_button">средне</string>
+    <string name="quit_game_process_button">ВЫЙТИ</string>
 </resources>
