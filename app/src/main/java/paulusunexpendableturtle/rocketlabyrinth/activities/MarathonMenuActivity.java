@@ -23,8 +23,7 @@ public class MarathonMenuActivity extends AppCompatActivity {
 
         if(nameMap.size() == 0)
             fillMap();
-        if(Bitmaps.isNull())
-            Bitmaps.decodeResources(getResources());
+        Bitmaps.tryDecodeResources(getResources());
 
         setContentView(R.layout.activity_marathon_menu);
     }
