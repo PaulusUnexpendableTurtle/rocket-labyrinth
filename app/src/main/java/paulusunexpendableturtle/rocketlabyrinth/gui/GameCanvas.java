@@ -85,9 +85,12 @@ public class GameCanvas{
 
         if(state == 1){
             p = new Paint();
-            p.setColor(Color.argb(128, 0, 0, 0));
+            p.setColor(Color.argb(66, 0, 0, 0));
             p.setStyle(Paint.Style.FILL);
             canvas.drawRect(0f, 0f, this.divx, this.divy, p);
+
+            //TODO: incorrect coordinates
+            exit.draw(canvas, this.divx, this.divy);
         }
 
     }
