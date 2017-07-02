@@ -13,7 +13,7 @@ import static paulusunexpendableturtle.rocketlabyrinth.statics.IconicConstants.m
 public final class Bitmaps {
     public static Sprite heart, cell, back, portal, pause;
     public static Hero hero;
-    public static CanvasButton exit;
+    public static CanvasButton save, exit;
 
     public static synchronized void tryDecodeResources(Resources c){
 
@@ -29,9 +29,8 @@ public final class Bitmaps {
         pause = new Sprite(c,R.drawable.pause_button_1, w, h);
 
         int[] color = {255, 0, 255, 255};
-        Log.d("exit", "decoding");
         exit = new CanvasButton(c, R.drawable.exit_button, w, h, c.getString(R.string.quit_game_process_button), color);
-        Log.d("exit", "decoded - " + exit.toString());
+        save = new CanvasButton(c, R.drawable.exit_button, w, h, c.getString(R.string.save_game_button), color);
 
         int[] t = {R.drawable.herow,
                 R.drawable.heroa,
