@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import static java.lang.Math.abs;
 
@@ -21,7 +22,7 @@ public class GameCanvas{
     private int side;
     private int pause_zone_x, pause_zone_y;
 
-    private Rect exit_zone;
+    private Rect exit_zone, save_zone;
 
     private int divx, divy;
 
@@ -92,12 +93,25 @@ public class GameCanvas{
             p.setStyle(Paint.Style.FILL);
             canvas.drawRect(0f, 0f, this.divx, this.divy, p);
 
-            exit.draw(canvas, divx - (exit.getWidth(canvas) >> 1), divy - (exit.getHeight(canvas) >> 1));
+            float line_up = divy - (exit.getHeight(canvas) >> 1) - save.getHeight(canvas),
+                    line_mid = divy - (exit.getHeight(canvas) >> 1),
+                    line_do = divy + (exit.getHeight(canvas) >> 1),
+            line_le = divx - (exit.getWidth(canvas) >> 1),
+            line_ri = divx + (exit.getWidth(canvas) >> 1);
 
-            exit_zone = new Rect(divx - (exit.getWidth(canvas) >> 1), divy - (exit.getHeight(canvas) >> 1),
-                    divx + (exit.getWidth(canvas) >> 1), divy - (exit.getHeight(canvas) >> 1));
-        }else
+            Log.d("lines", line_up + " " + line_mid + " " + line_do + " " + line_le + " " + line_ri);
+
+            exit.draw(canvas, line_le, line_mid);
+
+            exit_zone = new Rect(line_le, line_mid, exit.getWidth(canvas), exit.getHeight(canvas));
+
+            save.draw(canvas, line_le, line_up);
+
+            save_zone = new Rect(line_le, line_up, save.getWidth(canvas), save.getHeight(canvas));
+        }else {
             exit_zone = new Rect();
+            save_zone = new Rect();
+        }
 
     }
 
@@ -110,6 +124,10 @@ public class GameCanvas{
 
     public boolean check_exit(float x, float y){
         return exit_zone.isIn(x, y);
+    }
+
+    public boolean check_save(float x, float y){
+        return save_zone.isIn(x, y);
     }
 
     public boolean notNull(){
