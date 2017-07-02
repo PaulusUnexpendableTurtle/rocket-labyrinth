@@ -89,8 +89,7 @@ public class GameCanvas{
             p.setStyle(Paint.Style.FILL);
             canvas.drawRect(0f, 0f, this.divx, this.divy, p);
 
-            //TODO: incorrect coordinates
-            exit.draw(canvas, this.divx, this.divy);
+            exit.draw(canvas, this.divx - (exit.getWidth(canvas) >> 1), this.divy - (exit.getHeight(canvas) >> 1));
         }
 
     }
