@@ -7,5 +7,8 @@
     <string name="medium_marathon_button">Medium</string>
     <string name="hard_marathon_button">Hard</string>
     <string name="insane_marathon_button">Insane</string>
+
     <string name="quit_game_process_button">QUIT</string>
+    <string name="save_game_button">SAVE</string>
+
 </resources>
