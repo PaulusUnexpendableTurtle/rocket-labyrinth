@@ -7,6 +7,7 @@ public final class Strings {
     mode_marathon_medium = "MARATHON_MEDIUM",
     mode_marathon_hard = "MARATHON_HARD",
     mode_marathon_insane = "MARATHON_INSANE",
+    from_save = "FROM SAVE",
     key_mode = "MODE";
 
 }
