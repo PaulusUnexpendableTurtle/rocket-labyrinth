@@ -12,7 +12,7 @@ public abstract class Mode{
 
     long startLife, curLife;
 
-    public Mode(long life, int vel){
+    Mode(long life, int vel){
         startLife = life;
         curLife = life;
 
