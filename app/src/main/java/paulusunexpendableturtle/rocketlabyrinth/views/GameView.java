@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import paulusunexpendableturtle.rocketlabyrinth.activities.GameActivity;
 import paulusunexpendableturtle.rocketlabyrinth.game.Level;
 import paulusunexpendableturtle.rocketlabyrinth.game.modes.Mode;
 import paulusunexpendableturtle.rocketlabyrinth.input.LevelReader;
@@ -23,10 +24,19 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     public GameView(Context context){
         super(context);
         getHolder().addCallback(this);
+
+        destroyed = false;
+
+        this.owner = (GameActivity)context;
     }
+
+    public boolean destroyed;
 
     private DrawThread drawThread;
     private Mode mode;
+
+    private GameActivity owner;
+
     private static class DrawThread extends Thread{
 
         private GameCanvas canvas;
@@ -103,9 +113,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
         switch(drawThread.state){
             case 0:
+                owner.finish();
                 break;
             case 1:
-                if(event.getAction() == ACTION_DOWN) {
+                if(drawThread.canvas.check_exit(event.getX(), event.getY())){
+                    drawThread.requestStop();
+                    owner.finish();
+                    return false;
+                }
+                else if(event.getAction() == ACTION_DOWN) {
                     drawThread.requestRestore();
                     ignore = true;
                 }
@@ -143,6 +159,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder){
+
         drawThread.requestStop();
         boolean retry = true;
         while (retry) {
