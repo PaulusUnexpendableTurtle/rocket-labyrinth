@@ -16,7 +16,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        view = new GameView(this, this);
+        view = new GameView(this);
         view.set(getIntent().getStringExtra(key_mode));
         setContentView(view);
     }
