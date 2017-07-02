@@ -25,6 +25,10 @@ public class Rect {
         return isIn(x0, x1, a.x0, a.x1) && isIn(y0, y1, a.y0, a.y1);
     }
 
+    public boolean isIn(float x, float y){
+        return x >= x0 && x <= x1 && y >= y0 && y <= y1;
+    }
+
     private static boolean isIn(float a, float b, float c, float d){
         return !(b < c || d < a);
     }
