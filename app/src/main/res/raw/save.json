@@ -1,0 +1,51 @@
+{
+	"mode" : {
+		"instanceOf" : "easy",
+		"startLife" : 4000,
+		"curLife" : 4000,
+		"level" : -1,
+		"startVel" : 10
+	},
+
+	"level" : {
+		"dirX" : -1,
+		"dirY" : -1,
+		
+		"x" : -1,
+		"y" : -1,
+		
+		"vel" : -1,
+		"step" : -1,
+		
+		"life" : -1, 
+		"startlife" : -1,
+    	
+    	"complete" : false,
+		
+		"iterations" : -1, 
+		"steps" : -1,
+		
+		"firstTime" : -1, 
+		"lastTime" : -1,
+		
+		"side" : -1, 
+		
+		"width" : -1, 
+		"height" : -1,
+
+		"sizeX" : -1, 
+		"sizeY" : -1,
+    
+    	"field" : [
+    		[
+    			-1,
+    			-1
+    		],
+    		
+    		[
+    			-1,
+    			-1
+    		]
+    	]
+	}
+}
