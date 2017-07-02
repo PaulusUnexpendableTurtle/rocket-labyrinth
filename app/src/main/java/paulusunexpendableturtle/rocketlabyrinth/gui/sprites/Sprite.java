@@ -44,6 +44,10 @@ public class Sprite {
         return inSampleSize;
     }
 
+    public String toString(){
+        return "" + image;
+    }
+
     public int getWidth(Canvas canvas){
         return image.getScaledWidth(canvas);
     }
