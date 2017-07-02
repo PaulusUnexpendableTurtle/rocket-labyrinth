@@ -8,6 +8,7 @@ import android.view.SurfaceHolder;
 import static java.lang.Math.abs;
 
 import paulusunexpendableturtle.rocketlabyrinth.game.Level;
+import paulusunexpendableturtle.rocketlabyrinth.geometry.Rect;
 
 import static paulusunexpendableturtle.rocketlabyrinth.statics.IconicConstants.*;
 import static paulusunexpendableturtle.rocketlabyrinth.statics.Bitmaps.*;
@@ -19,6 +20,8 @@ public class GameCanvas{
 
     private int side;
     private int pause_zone_x, pause_zone_y;
+
+    private Rect exit_zone;
 
     private int divx, divy;
 
@@ -71,12 +74,12 @@ public class GameCanvas{
         p.setStyle(Paint.Style.STROKE);
         p.setTextSize(heart.getHeight(canvas));
         p.setStrokeJoin(Paint.Join.ROUND);
-        p.setStrokeWidth(heart.getHeight(canvas) / 10);
+        p.setStrokeWidth(heart.getHeight(canvas) / 15);
         p.setColor(Color.BLACK);
         canvas.drawText(Long.toString(life), side, side, p);
 
         p.setStyle(Paint.Style.FILL);
-        p.setColor(Color.YELLOW);
+        p.setColor(Color.argb(255, 0, 255, 255));
         canvas.drawText(Long.toString(life), side, side, p);
 
         pause.draw(canvas, this.divx - pause.getWidth(canvas), 0);
@@ -89,8 +92,12 @@ public class GameCanvas{
             p.setStyle(Paint.Style.FILL);
             canvas.drawRect(0f, 0f, this.divx, this.divy, p);
 
-            exit.draw(canvas, this.divx - (exit.getWidth(canvas) >> 1), this.divy - (exit.getHeight(canvas) >> 1));
-        }
+            exit.draw(canvas, divx - (exit.getWidth(canvas) >> 1), divy - (exit.getHeight(canvas) >> 1));
+
+            exit_zone = new Rect(divx - (exit.getWidth(canvas) >> 1), divy - (exit.getHeight(canvas) >> 1),
+                    divx + (exit.getWidth(canvas) >> 1), divy - (exit.getHeight(canvas) >> 1));
+        }else
+            exit_zone = new Rect();
 
     }
 
@@ -99,6 +106,10 @@ public class GameCanvas{
     }
     public int getPause_zone_y(){
         return pause_zone_y;
+    }
+
+    public boolean check_exit(float x, float y){
+        return exit_zone.isIn(x, y);
     }
 
     public boolean notNull(){
