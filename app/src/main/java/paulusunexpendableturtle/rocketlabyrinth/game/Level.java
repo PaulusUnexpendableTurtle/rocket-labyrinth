@@ -56,6 +56,14 @@ public class Level {
     }
     public void upTime(long last){lastTime = last;}
 
+    public long getFirstTime(){
+        return firstTime;
+    }
+
+    public long getLastTime(){
+        return lastTime;
+    }
+
     public void updateDirection(float x, float y){
 
         if(x == 0 && y == 0)
