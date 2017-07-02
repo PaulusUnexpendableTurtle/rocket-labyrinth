@@ -8,6 +8,7 @@ import android.util.SparseArray;
 import android.view.View;
 
 import paulusunexpendableturtle.rocketlabyrinth.R;
+import paulusunexpendableturtle.rocketlabyrinth.game.Save;
 import paulusunexpendableturtle.rocketlabyrinth.statics.Bitmaps;
 
 import static paulusunexpendableturtle.rocketlabyrinth.statics.Strings.*;
@@ -25,6 +26,8 @@ public class MarathonMenuActivity extends AppCompatActivity {
             fillMap();
         Bitmaps.tryDecodeResources(getResources());
 
+        Save.readFromFile(getResources());
+
         setContentView(R.layout.activity_marathon_menu);
     }
 
@@ -39,6 +42,12 @@ public class MarathonMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(key_mode, nameMap.get(view.getId()));
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy(){
+        Save.writeToFile(getResources());
+        super.onDestroy();
     }
 
 }
