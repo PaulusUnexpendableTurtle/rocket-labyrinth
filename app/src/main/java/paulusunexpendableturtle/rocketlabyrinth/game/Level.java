@@ -1,11 +1,14 @@
 package paulusunexpendableturtle.rocketlabyrinth.game;
 
+import java.lang.reflect.Field;
+import java.util.Map;
+
 import paulusunexpendableturtle.rocketlabyrinth.geometry.Rect;
 import static paulusunexpendableturtle.rocketlabyrinth.statics.IconicConstants.iconicVel;
 
 import static java.lang.Math.abs;
 
-public class Level {
+public class Level implements Cloneable{
 
     private int dirx, diry;
     private float x, y;
@@ -22,6 +25,7 @@ public class Level {
     private int side, width, height;
 
     private int sizeX, sizeY;
+
     private boolean[][] field;
 
     public Level(boolean[][] field, int x, int y, long startlife, long curlife, int vel){
@@ -88,6 +92,20 @@ public class Level {
     private void setDims(){
         width = sizeX * side;
         height = sizeY * side;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
+    }
+
+    public void setCoords(float x, float y){
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setSteps(int iterations, int steps){
+        this.iterations = iterations;
+        this.steps = steps;
     }
 
     public void update(){
@@ -207,5 +225,62 @@ public class Level {
     public int getVel(){return vel;}
 
     public boolean[][] getField(){return field;}
+
+    public static void translateToMap(Map<String, Object> map, Level level){
+        try{
+            level = (Level)level.clone();
+
+            String[] name = {
+                    "dirx",
+                    "diry",
+
+                    "x",
+                    "y",
+
+                    "vel",
+                    "step",
+
+                    "life",
+                    "startlife",
+
+                    "complete",
+
+                    "iterations",
+                    "steps",
+
+                    "firstTime",
+                    "lastTime",
+
+                    "side",
+
+                    "sizeX",
+                    "sizeY",
+
+                    "field"
+            };
+
+            Field[] fields = new Field[name.length];
+            for(int i = 0; i < name.length; ++i)
+                fields[i] = Level.class.getDeclaredField(name[i]);
+
+            for(Field f : fields)
+                if(!f.getName().equals("field"))
+                     map.put(f.getName(), f.get(level));
+
+        }catch(IllegalAccessException|CloneNotSupportedException|NoSuchFieldException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException{
+        Level res = (Level)super.clone();
+
+        res.field = new boolean[sizeY][sizeX];
+        for(int i = 0; i < sizeY; ++i)
+            System.arraycopy(field[i], 0, res.field[i], 0, sizeX);
+
+        return res;
+    }
 
 }
