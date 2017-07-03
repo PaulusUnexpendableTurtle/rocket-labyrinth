@@ -10,5 +10,10 @@
 
     <string name="quit_game_process_button">QUIT</string>
     <string name="save_game_button">SAVE</string>
+    <string name="game_saved_toast">Game Saved</string>
+
+    <string name="new_game_button">new game</string>
+    <string name="continue_game_button">continue</string>
+    <string name="level_number">Level: %d</string>
 
 </resources>
