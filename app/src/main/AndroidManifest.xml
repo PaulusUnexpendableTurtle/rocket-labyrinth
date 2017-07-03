@@ -17,12 +17,15 @@
         <activity
             android:name=".activities.MarathonMenuActivity"
             android:theme="@style/TrueFullscreen">
+        </activity>
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
+        <activity
+            android:name=".activities.MainMenuActivity"
+            android:theme="@style/TrueFullscreen">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
         </activity>
 
     </application>
