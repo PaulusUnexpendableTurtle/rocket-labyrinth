@@ -4,10 +4,10 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import static java.lang.Math.abs;
 
+import paulusunexpendableturtle.rocketlabyrinth.R;
 import paulusunexpendableturtle.rocketlabyrinth.game.Level;
 import paulusunexpendableturtle.rocketlabyrinth.geometry.Rect;
 
@@ -18,6 +18,8 @@ public class GameCanvas{
 
     private Canvas canvas;
     private SurfaceHolder holder;
+
+    private String level_text;
 
     private int side;
     private int pause_zone_x, pause_zone_y;
@@ -33,19 +35,22 @@ public class GameCanvas{
         divx = c.getDisplayMetrics().widthPixels;
         divy = c.getDisplayMetrics().heightPixels;
 
+        level_text = c.getString(R.string.level_number);
+
     }
 
     public void lock(){
         canvas = holder.lockCanvas();
     }
 
-    public void update(Level level, int state){
+    public void update(Level level, int state, int level_number){
 
         side = cell.getWidth(canvas);
         float step = (float)side / iconicSide;
         level.setSideAndStep(side, step);
 
-        level.update();
+        if(state == 2)
+            level.update();
 
         float x = level.getX(), y = level.getY();
         int sizeX = level.getXSize(), sizeY = level.getYSize(),
@@ -79,9 +84,16 @@ public class GameCanvas{
         p.setColor(Color.BLACK);
         canvas.drawText(Long.toString(life), side, side, p);
 
+        p.setTextSize(heart.getHeight(canvas) / 2);
+        canvas.drawText(String.format(level_text, level_number), 0, this.divy, p);
+
+        p.setTextSize(heart.getHeight(canvas));
         p.setStyle(Paint.Style.FILL);
         p.setColor(Color.argb(255, 0, 255, 255));
         canvas.drawText(Long.toString(life), side, side, p);
+
+        p.setTextSize(heart.getHeight(canvas) / 2);
+        canvas.drawText(String.format(level_text, level_number), 0, this.divy, p);
 
         pause.draw(canvas, this.divx - pause.getWidth(canvas), 0);
         pause_zone_x = this.divx - pause.getWidth(canvas);
@@ -95,18 +107,12 @@ public class GameCanvas{
 
             float line_up = divy - (exit.getHeight(canvas) >> 1) - save.getHeight(canvas),
                     line_mid = divy - (exit.getHeight(canvas) >> 1),
-                    line_do = divy + (exit.getHeight(canvas) >> 1),
-            line_le = divx - (exit.getWidth(canvas) >> 1),
-            line_ri = divx + (exit.getWidth(canvas) >> 1);
-
-            Log.d("lines", line_up + " " + line_mid + " " + line_do + " " + line_le + " " + line_ri);
+            line_le = divx - (exit.getWidth(canvas) >> 1);
 
             exit.draw(canvas, line_le, line_mid);
-
             exit_zone = new Rect(line_le, line_mid, exit.getWidth(canvas), exit.getHeight(canvas));
 
             save.draw(canvas, line_le, line_up);
-
             save_zone = new Rect(line_le, line_up, save.getWidth(canvas), save.getHeight(canvas));
         }else {
             exit_zone = new Rect();
