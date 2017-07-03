@@ -5,6 +5,10 @@
     <string name="insane_marathon_button">безумно</string>
     <string name="marathon_header">ВЫБЕРИ РЕЖИМ</string>
     <string name="medium_marathon_button">средне</string>
-    <string name="quit_game_process_button">ВЫЙТИ</string>
-    <string name="save_game_button">СОХР</string>
+    <string name="quit_game_process_button">Выйти</string>
+    <string name="save_game_button">Сохранить</string>
+    <string name="new_game_button">новая игра</string>
+    <string name="continue_game_button">продолжить</string>
+    <string name="game_saved_toast">Игра Сохранена</string>
+    <string name="level_number">Уровень: %d</string>
 </resources>
