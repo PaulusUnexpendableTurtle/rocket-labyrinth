@@ -2,11 +2,13 @@ package paulusunexpendableturtle.rocketlabyrinth.views;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
+import paulusunexpendableturtle.rocketlabyrinth.R;
 import paulusunexpendableturtle.rocketlabyrinth.activities.GameActivity;
 import paulusunexpendableturtle.rocketlabyrinth.game.Level;
 import paulusunexpendableturtle.rocketlabyrinth.game.Save;
@@ -25,6 +27,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
             this.mode = Mode.ModeFactory.buildMode(mode);
         else
             fromSave = true;
+
+        Log.d("on view creation", mode);
     }
 
     public GameView(Context context){
@@ -63,6 +67,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
             mode = Save.getSavedMode();
             level = Save.getSavedLevel();
+
+            Log.d("on thread creation", mode + " " + level);
+
+            state = 1;
         }
 
         @Override
@@ -71,8 +79,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
             if(level == null)
                 lastTime = firstTime = System.currentTimeMillis();
             else{
-                firstTime = System.currentTimeMillis();
-                lastTime = level.getLastTime() - level.getFirstTime() + firstTime;
+                lastTime = System.currentTimeMillis();
+                firstTime = level.getFirstTime() - level.getLastTime() + lastTime;
             }
 
             while(state > 0){
@@ -99,7 +107,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
                             }
 
                             level.upTime(lastTime);
-                            canvas.update(level, state);
+                            canvas.update(level, state, mode.getLevel());
                         }
                     }finally {
                         canvas.unlock();
@@ -136,7 +144,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
             case 1:
                 if(event.getAction() == ACTION_DOWN && drawThread.canvas.check_save(event.getX(), event.getY())) {
                     Save.loadSave(drawThread.mode, drawThread.level);
-                    Toast.makeText(getContext(), "Game Saved", Toast.LENGTH_SHORT).show();
+                    Save.writeToFile(getContext());
+                    Toast.makeText(getContext(), getResources().getString(R.string.game_saved_toast), Toast.LENGTH_SHORT).show();
                 }else if(drawThread.canvas.check_exit(event.getX(), event.getY())){
                     drawThread.requestStop();
                     owner.finish();
@@ -172,9 +181,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     public void surfaceCreated(SurfaceHolder holder){
 
-        if(fromSave)
+        if(fromSave) {
+            Save.readFromFile(getContext());
             drawThread = new DrawThread(getContext().getResources(), getHolder());
-        else
+        }else
             drawThread = new DrawThread(getContext().getResources(), getHolder(), mode);
 
         drawThread.start();
