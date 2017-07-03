@@ -21,7 +21,7 @@ android {
         cruncherEnabled = false
     }
     dexOptions{
-        javaMaxHeapSize = "512m"
+        javaMaxHeapSize = "256m"
     }
 }
 
@@ -30,4 +30,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
 }
