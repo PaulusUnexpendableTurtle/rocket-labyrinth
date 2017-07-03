@@ -1,6 +1,6 @@
 package paulusunexpendableturtle.rocketlabyrinth.game;
 
-import android.content.res.Resources;
+import android.content.Context;
 
 import paulusunexpendableturtle.rocketlabyrinth.game.modes.Mode;
 import paulusunexpendableturtle.rocketlabyrinth.input.SaveReader;
@@ -16,8 +16,6 @@ public abstract class Save {
         level = l;
     }
 
-    //TODO: use it somewhere
-
     public static Mode getSavedMode(){
         return mode;
     }
@@ -26,13 +24,13 @@ public abstract class Save {
         return level;
     }
 
-    public static void readFromFile(Resources resources){
-        SaveReader reader = new SaveReader(resources);
+    public static void readFromFile(Context context){
+        SaveReader reader = new SaveReader(context);
         loadSave(reader.readMode(), reader.readLevel());
     }
 
-    public static void writeToFile(Resources resources) {
-        (new SaveWriter(resources)).write(mode, level);
+    public static void writeToFile(Context context) {
+        (new SaveWriter(context)).write(mode, level);
     }
 
 }
