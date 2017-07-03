@@ -44,8 +44,8 @@ public class LevelReader {
 
     private static final int[] levelIds = {
         simple,
-        pixel,
         exit,
+        pixel,
         japanese,
         randlevel,
         levelx,
