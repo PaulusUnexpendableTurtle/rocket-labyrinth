@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 
 import paulusunexpendableturtle.rocketlabyrinth.R;
-import paulusunexpendableturtle.rocketlabyrinth.game.Save;
-import paulusunexpendableturtle.rocketlabyrinth.statics.Bitmaps;
 
 import static paulusunexpendableturtle.rocketlabyrinth.statics.Strings.*;
 
@@ -20,14 +19,11 @@ public class MarathonMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         if(nameMap.size() == 0)
             fillMap();
-        Bitmaps.tryDecodeResources(getResources());
 
-        Save.readFromFile(getResources());
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_marathon_menu);
     }
 
@@ -46,7 +42,7 @@ public class MarathonMenuActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy(){
-        Save.writeToFile(getResources());
+        Log.d("Destroy", "MarathonMenu");
         super.onDestroy();
     }
 
